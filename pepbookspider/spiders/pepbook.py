@@ -12,7 +12,7 @@ class PepbookSpider(scrapy.Spider):
             yield response.follow(link.get(), self.parseBooks)
 
     def parseBooks(self, response):
-        for book in response.xpath("//li[@class='fl']"):
+        for book in response.xpath("//li[contains(@class,'fl')]"):
             book_names = book.xpath("h6/a/text()").getall()
             filt = getattr(self, 'filt', None)
             if filt is not None:
